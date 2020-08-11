@@ -31,3 +31,9 @@ func (ms *ModelSuite) Test_Task() {
 	err = ms.DB.Create(&task)
 	ms.NoError(err)
 }
+
+func (ms *ModelSuite) Test_Task_Storage() {
+	ts := TasksStorage{}
+	ts = ts.Add(Task{})
+	ms.Equal(1, len(ts))
+}

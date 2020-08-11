@@ -31,6 +31,9 @@ func (t Task) String() string {
 // Tasks is not required by pop and may be deleted
 type Tasks []Task
 
+//TasksStorage ...
+type TasksStorage Tasks
+
 // String is not required by pop and may be deleted
 func (t Tasks) String() string {
 	jt, _ := json.Marshal(t)
@@ -57,4 +60,8 @@ func (t *Task) ValidateCreate(tx *pop.Connection) (*validate.Errors, error) {
 // This method is not required and may be deleted.
 func (t *Task) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
+}
+
+func (ts TasksStorage) Add(task Task) TasksStorage {
+	return append(ts, task)
 }
