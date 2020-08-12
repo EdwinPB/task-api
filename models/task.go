@@ -65,3 +65,7 @@ func (t *Task) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 func (ts TasksStorage) Add(task Task) TasksStorage {
 	return append(ts, task)
 }
+
+func (ts TasksStorage) Save(tx *pop.Connection) error {
+	return tx.Create(&ts)
+}

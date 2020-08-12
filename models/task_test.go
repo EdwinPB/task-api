@@ -32,10 +32,26 @@ func (ms *ModelSuite) Test_Task() {
 	ms.NoError(err)
 }
 
-func (ms *ModelSuite) Test_Task_Storage() {
+func (ms *ModelSuite) Test_Task_Storage_Add() {
 	ts := TasksStorage{}
 	ts = ts.Add(Task{})
 	ms.Equal(1, len(ts))
 	ts = ts.Add(Task{})
 	ms.Equal(2, len(ts))
+}
+
+func (ms *ModelSuite) Test_Task_Storage_Save() {
+	ts := TasksStorage{}
+	ts = ts.Add(Task{})
+	ms.Equal(1, len(ts))
+	ts = ts.Add(Task{})
+	ms.Equal(2, len(ts))
+
+	err := ts.Save(ms.DB)
+	ms.NoError(err)
+
+	stasks := Tasks{}
+	ms.DB.All(&stasks)
+
+	ms.Equal(2, len(stasks))
 }
