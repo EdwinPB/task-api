@@ -36,4 +36,6 @@ func (ms *ModelSuite) Test_Task_Storage() {
 	ts := TasksStorage{}
 	ts = ts.Add(Task{})
 	ms.Equal(1, len(ts))
+	ts = ts.Add(Task{})
+	ms.Equal(2, len(ts))
 }
